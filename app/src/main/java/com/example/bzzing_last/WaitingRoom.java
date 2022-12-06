@@ -14,6 +14,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+
+import java.util.Random;
 import java.util.ArrayList;
 
 public class    WaitingRoom extends AppCompatActivity {
@@ -58,9 +60,9 @@ public class    WaitingRoom extends AppCompatActivity {
 
     public int randomNumbers()
     {
-        int roomCode =(int)(Math.random() * 10000);
-        if(roomCode<1000)
-            roomCode+=1000;
+        Random rnd = new Random();
+        int roomCode = rnd.nextInt(8999) + 1000;
+
         Toast.makeText(this, ""+roomCode, Toast.LENGTH_SHORT).show(); // delete
         return roomCode;
     }
