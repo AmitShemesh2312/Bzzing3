@@ -37,7 +37,7 @@ public class    WaitingRoom extends AppCompatActivity {
             arr.add(new Player(0,"player"+i));
         }
 
-        gameRoom.setPlayers(arr);
+        gameRoom.setPlayers(arr-1);
         gameRoom.setRounds(0);
 
 
