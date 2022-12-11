@@ -18,7 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.Random;
 import java.util.ArrayList;
 
-public class    WaitingRoom extends AppCompatActivity {
+public class WaitingRoom extends AppCompatActivity {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -29,12 +29,12 @@ public class    WaitingRoom extends AppCompatActivity {
         setContentView(R.layout.activity_waiting_room);
         int roomCode = randomNumbers();
         GameRoom gameRoom = new GameRoom();
-        gameRoom.setRoomNum(roomCode);
+        gameRoom.setRoomCode(roomCode);
         gameRoom.setPlayersNum(1);
 
         ArrayList<Player> arr = new ArrayList<>();
         for (int i = 0; i < gameRoom.getPlayersNum() ; i++) {
-            arr.add(new Player(0,"player"+i));
+            arr.add(new Player(0,"player" + i));
         }
 
         gameRoom.setPlayers(arr);
@@ -61,7 +61,8 @@ public class    WaitingRoom extends AppCompatActivity {
     {
         Random rnd = new Random();
         int roomCode = rnd.nextInt(899999) + 100000;
-
+      //  if (db.collection("GameRooms").whereEqualTo())
+    //        roomCode = randomNumbers();
         return roomCode;
     }
 }

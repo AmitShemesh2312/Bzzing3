@@ -5,15 +5,15 @@ import java.util.HashMap;
 
 public class GameRoom {
     private final int maxPlayers = 4;
-    private int roomNum;
+    private int roomCode;
     private int playersNum;
     private ArrayList<Player> players;
     private int rounds;
 
 
-    public GameRoom(int roomNum, int playersNum, int rounds)
+    public GameRoom(int roomCode, int playersNum, int rounds)
     {
-        this.roomNum = roomNum;
+        this.roomCode = roomCode;
         this.playersNum = playersNum;
         this.rounds = rounds;
        this.players = new ArrayList<>(4);
@@ -25,9 +25,6 @@ public class GameRoom {
         return maxPlayers;
     }
 
-    public void setRoomNum(int roomNum) {
-        this.roomNum = roomNum;
-    }
 
     public void setPlayersNum(int playersNum) {
         this.playersNum = playersNum;
@@ -41,9 +38,6 @@ public class GameRoom {
         this.rounds = rounds;
     }
 
-    public int getRoomNum() {
-        return roomNum;
-    }
 
     public int getPlayersNum() {
         return playersNum;
@@ -57,12 +51,15 @@ public class GameRoom {
         return rounds;
     }
 
+    public int getRoomCode(){ return roomCode; }
+
+    public void setRoomCode(int roomCode){ this.roomCode = roomCode; }
+
 
     public HashMap<String,Object> GameRoomToHashMap()
     {
         HashMap<String, Object> map = new HashMap<>();
 
-        map.put("roomNum", roomNum);
         map.put("playersNum", playersNum);
         map.put("rounds", rounds);
 
@@ -81,7 +78,6 @@ public class GameRoom {
     {
         // hashmap to game room object
 
-        this.roomNum = (int) map.get("roomNum");
         this.playersNum = (int) map.get("playersNum");
         this.rounds = (int) map.get("rounds");
         for (int i = 0; i < playersNum; i++)
