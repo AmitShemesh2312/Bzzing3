@@ -61,7 +61,7 @@ public class    WaitingRoom extends AppCompatActivity {
     public int randomNumbers()
     {
         Random rnd = new Random();
-        int roomCode = rnd.nextInt(8999) + 1000;
+        int roomCode = rnd.nextInt(899999) + 100000;
 
         Toast.makeText(this, ""+roomCode, Toast.LENGTH_SHORT).show(); // delete
         return roomCode;
