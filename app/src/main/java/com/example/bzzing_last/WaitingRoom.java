@@ -41,14 +41,13 @@ public class    WaitingRoom extends AppCompatActivity {
         gameRoom.setRounds(0);
 
 
+        db.collection("GameRooms").document("" + randomNumbers()).set(gameRoom.GameRoomToHashMap())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
 
-        db.collection("GameRooms").add(gameRoom.GameRoomToHashMap()).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                Toast.makeText(WaitingRoom.this,"success  ",Toast.LENGTH_SHORT).show();
-
-            }
-        })
+                    }
+                })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
@@ -63,7 +62,6 @@ public class    WaitingRoom extends AppCompatActivity {
         Random rnd = new Random();
         int roomCode = rnd.nextInt(899999) + 100000;
 
-        Toast.makeText(this, ""+roomCode, Toast.LENGTH_SHORT).show(); // delete
         return roomCode;
     }
 }
