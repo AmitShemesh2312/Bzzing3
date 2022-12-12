@@ -27,42 +27,11 @@ public class WaitingRoom extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waiting_room);
-        int roomCode = randomNumbers();
-        GameRoom gameRoom = new GameRoom();
-        gameRoom.setRoomCode(roomCode);
-        gameRoom.setPlayersNum(1);
-
-        ArrayList<Player> arr = new ArrayList<>();
-        for (int i = 0; i < gameRoom.getPlayersNum() ; i++) {
-            arr.add(new Player(0,"player" + i));
-        }
-
-        gameRoom.setPlayers(arr);
-        gameRoom.setRounds(0);
 
 
-        db.collection("GameRooms").document("" + randomNumbers()).set(gameRoom.GameRoomToHashMap())
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
 
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(WaitingRoom.this,"fail "+ e.getMessage(),Toast.LENGTH_SHORT).show();
-                    }
-                });
 
     }
 
-    public int randomNumbers()
-    {
-        Random rnd = new Random();
-        int roomCode = rnd.nextInt(899999) + 100000;
-      //  if (db.collection("GameRooms").whereEqualTo())
-    //        roomCode = randomNumbers();
-        return roomCode;
-    }
+
 }

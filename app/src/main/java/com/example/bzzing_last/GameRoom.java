@@ -3,7 +3,7 @@ package com.example.bzzing_last;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GameRoom {
+public class GameRoom{
     private final int maxPlayers = 4;
     private int roomCode;
     private int playersNum;
@@ -60,6 +60,7 @@ public class GameRoom {
     {
         HashMap<String, Object> map = new HashMap<>();
 
+        map.put("roomCode", roomCode);
         map.put("playersNum", playersNum);
         map.put("rounds", rounds);
 

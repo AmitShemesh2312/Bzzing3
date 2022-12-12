@@ -10,14 +10,31 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.Random;
+
+public class MainActivity extends AppCompatActivity implements GameRoomHandler {
     private int choice = 0;
-
-
+    private DB database;
+private GameRoom gameRoom;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        database = new DB(this);
+
+        int roomCode = randomNumbers();
+        gameRoom = new GameRoom();
+        gameRoom.setRoomCode(roomCode);
+        gameRoom.setPlayersNum(1);
+
+        ArrayList<Player> arr = new ArrayList<>();
+        for (int i = 0; i < gameRoom.getPlayersNum() ; i++) {
+            arr.add(new Player(0, "player " + i));
+        }
+
+        gameRoom.setPlayers(arr);
+        gameRoom.setRounds(0);
     }
 
     public void roomChoice(View view) {
@@ -46,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
         {
             if(choice == 1)
             {
-                Intent intent = new Intent(this, WaitingRoom.class);
-                startActivity(intent);
+                database.addGameRoom(gameRoom);
+
             }
             else if (rC.equals(""))
                 Toast.makeText(this, "Enter room code", Toast.LENGTH_SHORT).show();
@@ -62,5 +79,22 @@ public class MainActivity extends AppCompatActivity {
         Button b = findViewById(R.id.btnNextPage);
         b.setBackgroundColor(Color.parseColor("#000000"));
         //הצטרפות לחדר
+    }
+    @Override
+    public void handleGameRoomData(boolean success) {
+        if (success){
+            Intent intent = new Intent(this, WaitingRoom.class);
+            startActivity(intent);
+        }
+
+
+    }
+    public int randomNumbers()
+    {
+        Random rnd = new Random();
+        int roomCode = rnd.nextInt(899999) + 100000;
+        //  if (db.collection("GameRooms").whereEqualTo("roomCode", roomCode))
+        //       roomCode = randomNumbers();
+        return roomCode;
     }
 }
