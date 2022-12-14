@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements GameRoomHandler {
     private DB database = new DB(this);
     private GameRoom gameRoom;
     private boolean allowBack=true;
+    private DB ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,8 +110,8 @@ public class MainActivity extends AppCompatActivity implements GameRoomHandler {
     {
         Random rnd = new Random();
         int roomCode = rnd.nextInt(899999) + 100000;
-        //  if (db.collection("GameRooms").whereEqualTo("roomCode", roomCode))
-        //       roomCode = randomNumbers();
+          if (database.)
+               roomCode = randomNumbers();
         return roomCode;
     }
     @Override

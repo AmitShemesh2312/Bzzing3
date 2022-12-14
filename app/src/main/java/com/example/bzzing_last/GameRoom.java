@@ -16,7 +16,7 @@ public class GameRoom{
         this.roomCode = roomCode;
         this.playersNum = playersNum;
         this.rounds = rounds;
-       this.players = new ArrayList<>(4);
+        this.players = new ArrayList<>(4);
     }
 
     public GameRoom(){} // empty constructor
@@ -57,8 +57,7 @@ public class GameRoom{
         map.put("roomCode", roomCode);
         map.put("playersNum", playersNum);
         map.put("rounds", rounds);
-
-map.put("players",players);
+        map.put("players",players);
         return map;
 
     }
@@ -66,7 +65,6 @@ map.put("players",players);
     public  GameRoom(HashMap<String,Object> map)
     {
         // hashmap to game room object
-
         this.playersNum = (int) map.get("playersNum");
         this.rounds = (int) map.get("rounds");
         for (int i = 0; i < playersNum; i++)
@@ -76,7 +74,4 @@ map.put("players",players);
             players.set(i, new Player(name, score));
         }
     }
-
-
-
 }
