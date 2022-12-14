@@ -12,11 +12,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class DB {
     FirebaseFirestore db;
-GameRoomHandler activity;
+    GameRoomHandler activity;
     public DB(MainActivity activity)
     {
         db = FirebaseFirestore.getInstance();
-        this.activity=activity;
+        this.activity = activity;
     }
 
     public void insertPlayer()

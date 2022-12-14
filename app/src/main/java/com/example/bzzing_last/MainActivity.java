@@ -15,26 +15,14 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements GameRoomHandler {
     private int choice = 0;
-    private DB database;
-private GameRoom gameRoom;
+    private DB database = new DB(this);
+    private GameRoom gameRoom;
+    private boolean allowBack=true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        database = new DB(this);
-
-        int roomCode = randomNumbers();
-        gameRoom = new GameRoom();
-        gameRoom.setRoomCode(roomCode);
-        gameRoom.setPlayersNum(1);
-
-        ArrayList<Player> arr = new ArrayList<>();
-        for (int i = 0; i < gameRoom.getPlayersNum() ; i++) {
-            arr.add(new Player(0, "player " + i));
-        }
-
-        gameRoom.setPlayers(arr);
-        gameRoom.setRounds(0);
     }
 
     public void roomChoice(View view) {
@@ -55,25 +43,49 @@ private GameRoom gameRoom;
     }
 
     public void nextPage(View view) {
-        EditText name= findViewById(R.id.typeName);
-        String n= name.getText().toString();
+        Button b = (Button) findViewById(R.id.btnNextPage);
+        b.setEnabled(false);
+
+
+        EditText name = findViewById(R.id.typeName);
+        String n = name.getText().toString();
         EditText roomCode = findViewById(R.id.typeRoomCode);
         String rC = roomCode.getText().toString();
         if (choice != 0 && !n.equals(""))
         {
             if(choice == 1)
-            {
-                database.addGameRoom(gameRoom);
+                createRoom();
+
+            else if (rC.equals("")) {
+                Toast.makeText(this, "Enter room code", Toast.LENGTH_SHORT).show();
+                b.setEnabled(true);
 
             }
-            else if (rC.equals(""))
-                Toast.makeText(this, "Enter room code", Toast.LENGTH_SHORT).show();
             else
                 joinRoom();
         }
         else
             Toast.makeText(this, "Enter the required fields", Toast.LENGTH_SHORT).show();
     }
+
+    private void createRoom() {
+        int roomCode = randomNumbers();
+        gameRoom = new GameRoom();
+        gameRoom.setRoomCode(roomCode);
+        gameRoom.setPlayersNum();
+
+        ArrayList<Player> arr = new ArrayList<>();
+
+        EditText userName = findViewById(R.id.typeName);
+        String name = userName.getText().toString();
+        for (int i = 0; i < gameRoom.getPlayersNum() ; i++)
+            arr.add(new Player(name,  i));
+
+        gameRoom.setPlayers(arr);
+
+        database.addGameRoom(gameRoom);
+    }
+
     public void joinRoom()
     {
         Button b = findViewById(R.id.btnNextPage);
@@ -83,11 +95,15 @@ private GameRoom gameRoom;
     @Override
     public void handleGameRoomData(boolean success) {
         if (success){
+            allowBack=false;//jjj
             Intent intent = new Intent(this, WaitingRoom.class);
             startActivity(intent);
         }
-
-
+        else {
+            Button b = (Button) findViewById(R.id.btnNextPage);
+            b.setEnabled(true);
+            Toast.makeText(this, "Try Again!", Toast.LENGTH_SHORT).show();
+        }
     }
     public int randomNumbers()
     {
@@ -96,5 +112,10 @@ private GameRoom gameRoom;
         //  if (db.collection("GameRooms").whereEqualTo("roomCode", roomCode))
         //       roomCode = randomNumbers();
         return roomCode;
+    }
+    @Override
+    public void onBackPressed(){
+        if(allowBack)
+            super.onBackPressed();
     }
 }

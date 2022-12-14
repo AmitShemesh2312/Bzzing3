@@ -5,10 +5,10 @@ import java.util.HashMap;
 
 public class GameRoom{
     private final int maxPlayers = 4;
-    private int roomCode;
-    private int playersNum;
+    private int playersNum = 0;
+    private int rounds = 0;
     private ArrayList<Player> players;
-    private int rounds;
+    private int roomCode;
 
 
     public GameRoom(int roomCode, int playersNum, int rounds)
@@ -25,35 +25,29 @@ public class GameRoom{
         return maxPlayers;
     }
 
-
-    public void setPlayersNum(int playersNum) {
-        this.playersNum = playersNum;
+    public void setPlayersNum() {
+        this.playersNum++;
+    }
+    public int getPlayersNum() {
+        return playersNum;
     }
 
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
-
-    public void setRounds(int rounds) {
-        this.rounds = rounds;
-    }
-
-
-    public int getPlayersNum() {
-        return playersNum;
-    }
-
     public ArrayList<Player> getPlayers() {
         return players;
     }
 
+    public void setRounds() {
+        this.rounds++;
+    }
     public int getRounds() {
         return rounds;
     }
 
-    public int getRoomCode(){ return roomCode; }
-
     public void setRoomCode(int roomCode){ this.roomCode = roomCode; }
+    public int getRoomCode(){ return roomCode; }
 
 
     public HashMap<String,Object> GameRoomToHashMap()
@@ -64,13 +58,7 @@ public class GameRoom{
         map.put("playersNum", playersNum);
         map.put("rounds", rounds);
 
-
-        // players
-        for (int i = 0; i < playersNum; i++) {
-            map.put("name"+i, players.get(i).getName());
-            map.put("score"+i, players.get(i).getScore());
-        }
-
+map.put("players",players);
         return map;
 
     }
@@ -85,7 +73,7 @@ public class GameRoom{
         {
             int score= (int)map.get("score"+i);
             String name = (String)map.get("name"+i);
-            players.set(i, new Player(score, name));
+            players.set(i, new Player(name, score));
         }
     }
 
