@@ -59,13 +59,12 @@ public class DB {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        activity.roomExistResult(true);
+                        activity.roomExistResult(true, roomCode);
                     } else {
-                        activity.roomExistResult(false);
-
+                        activity.roomExistResult(false, roomCode);
                     }
                 } else {
-                    activity.roomExistResult(false);
+                    activity.roomExistResult(false, roomCode);
 
                 }
             }

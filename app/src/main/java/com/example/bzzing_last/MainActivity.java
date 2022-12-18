@@ -71,10 +71,7 @@ public class MainActivity extends AppCompatActivity implements GameRoomHandler {
     }
 
     private void createRoom() {
-       randomNumbers();
-        int roomCode= 35214;
         gameRoom = new GameRoom();
-        gameRoom.setRoomCode(roomCode);
         gameRoom.setPlayersNum();
 
         ArrayList<Player> arr = new ArrayList<>();
@@ -85,8 +82,7 @@ public class MainActivity extends AppCompatActivity implements GameRoomHandler {
             arr.add(new Player(name,  i));
 
         gameRoom.setPlayers(arr);
-
-        database.addGameRoom(gameRoom);
+        randomNumbers();
     }
 
     public void joinRoom()
@@ -110,20 +106,19 @@ public class MainActivity extends AppCompatActivity implements GameRoomHandler {
     }
 
     @Override
-    public void roomExistResult(boolean success) {
+    public void roomExistResult(boolean success, int roomCode) {
         if (success)
-    Toast.makeText(this, "yes", Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(this, "no", Toast.LENGTH_SHORT).show();
+            randomNumbers();
+        else{
+            gameRoom.setRoomCode(roomCode);
+            database.addGameRoom(gameRoom);
+
+        }
     }
 
     public void randomNumbers()
     {
         Random rnd = new Random();
-        int roomCode = rnd.nextInt(899999) + 100000;
-       // if (false)
-           //    roomCode = randomNumbers();
-        //return roomCode;
         database.roomExist(1000);
     }
     @Override
