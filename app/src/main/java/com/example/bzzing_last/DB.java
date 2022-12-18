@@ -1,13 +1,11 @@
 package com.example.bzzing_last;
 
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -52,6 +50,26 @@ public class DB {
                         activity.handleGameRoomData(task.isSuccessful());
                     }
                 });
+    }
+    public void roomExist(int roomCode){
+        DocumentReference docRef = db.collection("GameRooms").document(""+roomCode);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        activity.roomExistResult(true);
+                    } else {
+                        activity.roomExistResult(false);
+
+                    }
+                } else {
+                    activity.roomExistResult(false);
+
+                }
+            }
+        });
     }
 
 

@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.DocumentReference;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -18,7 +20,6 @@ public class MainActivity extends AppCompatActivity implements GameRoomHandler {
     private DB database = new DB(this);
     private GameRoom gameRoom;
     private boolean allowBack=true;
-    private DB ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +71,8 @@ public class MainActivity extends AppCompatActivity implements GameRoomHandler {
     }
 
     private void createRoom() {
-        int roomCode = randomNumbers();
+       randomNumbers();
+        int roomCode= 35214;
         gameRoom = new GameRoom();
         gameRoom.setRoomCode(roomCode);
         gameRoom.setPlayersNum();
@@ -106,13 +108,23 @@ public class MainActivity extends AppCompatActivity implements GameRoomHandler {
             Toast.makeText(this, "Try Again!", Toast.LENGTH_SHORT).show();
         }
     }
-    public int randomNumbers()
+
+    @Override
+    public void roomExistResult(boolean success) {
+        if (success)
+    Toast.makeText(this, "yes", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(this, "no", Toast.LENGTH_SHORT).show();
+    }
+
+    public void randomNumbers()
     {
         Random rnd = new Random();
         int roomCode = rnd.nextInt(899999) + 100000;
-          if (database.)
-               roomCode = randomNumbers();
-        return roomCode;
+       // if (false)
+           //    roomCode = randomNumbers();
+        //return roomCode;
+        database.roomExist(1000);
     }
     @Override
     public void onBackPressed(){
