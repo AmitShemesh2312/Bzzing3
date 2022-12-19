@@ -6,4 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".WaitingRoom">
 
+    <TextView
+        android:id="@+id/roomCodeText"
+        android:layout_width="360dp"
+        android:layout_height="123dp"
+        android:layout_marginTop="108dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

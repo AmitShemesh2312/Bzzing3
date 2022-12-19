@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements GameRoomHandler {
     private int choice = 0;
     private DB database = new DB(this);
     private GameRoom gameRoom;
-    private boolean allowBack=true;
+    private int roomCode = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity implements GameRoomHandler {
             else if (rC.equals("")) {
                 Toast.makeText(this, "Enter room code", Toast.LENGTH_SHORT).show();
                 b.setEnabled(true);
-
             }
             else
                 joinRoom();
@@ -94,8 +93,8 @@ public class MainActivity extends AppCompatActivity implements GameRoomHandler {
     @Override
     public void handleGameRoomData(boolean success) {
         if (success){
-            allowBack=false;
             Intent intent = new Intent(this, WaitingRoom.class);
+            intent.putExtra("roomCode", roomCode);
             startActivity(intent);
         }
         else {
@@ -119,6 +118,8 @@ public class MainActivity extends AppCompatActivity implements GameRoomHandler {
     {
         Random rnd = new Random();
         int random = rnd.nextInt(899999) + 100000;
-        database.roomExist(random);
+        roomCode = random;
+        Toast.makeText(this,""+ roomCode, Toast.LENGTH_SHORT).show();
+        database.roomExist(roomCode);
     }
 }

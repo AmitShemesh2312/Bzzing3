@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -14,6 +15,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+
+import org.w3c.dom.Text;
 
 import java.util.Random;
 import java.util.ArrayList;
@@ -27,10 +30,15 @@ public class WaitingRoom extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waiting_room);
+        showRoomCode();
 
 
 
-
+    }
+    public void showRoomCode()
+    {
+        //TextView textView = findViewById(R.id.roomCodeText);
+        //textView.setText();
     }
     @Override
     public void onBackPressed(){
