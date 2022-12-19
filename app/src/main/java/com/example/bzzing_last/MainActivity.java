@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements GameRoomHandler {
     @Override
     public void handleGameRoomData(boolean success) {
         if (success){
-            allowBack=false;//jjj
+            allowBack=false;
             Intent intent = new Intent(this, WaitingRoom.class);
             startActivity(intent);
         }
@@ -112,7 +112,6 @@ public class MainActivity extends AppCompatActivity implements GameRoomHandler {
         else{
             gameRoom.setRoomCode(roomCode);
             database.addGameRoom(gameRoom);
-
         }
     }
 
