@@ -32,6 +32,10 @@ public class WaitingRoom extends AppCompatActivity {
 
 
     }
+    @Override
+    public void onBackPressed(){
+return;
+    }
 
 
 }

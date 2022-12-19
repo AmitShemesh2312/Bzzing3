@@ -119,11 +119,7 @@ public class MainActivity extends AppCompatActivity implements GameRoomHandler {
     public void randomNumbers()
     {
         Random rnd = new Random();
-        database.roomExist(1000);
-    }
-    @Override
-    public void onBackPressed(){
-        if(allowBack)
-            super.onBackPressed();
+        int random = rnd.nextInt(899999) + 100000;
+        database.roomExist(random);
     }
 }
