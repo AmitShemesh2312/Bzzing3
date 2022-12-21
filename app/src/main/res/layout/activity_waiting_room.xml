@@ -10,9 +10,12 @@
         android:id="@+id/roomCodeText"
         android:layout_width="360dp"
         android:layout_height="123dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="48dp"
         android:text=""
+        android:textColor="#000000"
+        android:textSize="100sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

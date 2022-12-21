@@ -56,14 +56,19 @@ public class MainActivity extends AppCompatActivity implements GameRoomHandler {
         if (choice != 0 && !n.equals(""))
         {
             if(choice == 1)
+            {
+                b.setBackgroundColor(Color.parseColor("#000000"));//לתקן צבע
                 createRoom();
-
+            }
             else if (rC.equals("")) {
                 Toast.makeText(this, "Enter room code", Toast.LENGTH_SHORT).show();
                 b.setEnabled(true);
             }
             else
+            {
+                b.setBackgroundColor(Color.parseColor("#000000"));//לתקן צבע
                 joinRoom();
+            }
         }
         else
             Toast.makeText(this, "Enter the required fields", Toast.LENGTH_SHORT).show();
@@ -86,8 +91,6 @@ public class MainActivity extends AppCompatActivity implements GameRoomHandler {
 
     public void joinRoom()
     {
-        Button b = findViewById(R.id.btnNextPage);
-        b.setBackgroundColor(Color.parseColor("#000000"));
         //הצטרפות לחדר
     }
     @Override
@@ -108,7 +111,8 @@ public class MainActivity extends AppCompatActivity implements GameRoomHandler {
     public void roomExistResult(boolean success, int roomCode) {
         if (success)
             randomNumbers();
-        else{
+        else
+        {
             gameRoom.setRoomCode(roomCode);
             database.addGameRoom(gameRoom);
         }
@@ -119,7 +123,6 @@ public class MainActivity extends AppCompatActivity implements GameRoomHandler {
         Random rnd = new Random();
         int random = rnd.nextInt(899999) + 100000;
         roomCode = random;
-        Toast.makeText(this,""+ roomCode, Toast.LENGTH_SHORT).show();
         database.roomExist(roomCode);
     }
 }

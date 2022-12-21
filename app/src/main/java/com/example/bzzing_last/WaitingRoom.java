@@ -3,6 +3,7 @@ package com.example.bzzing_last;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,8 +38,9 @@ public class WaitingRoom extends AppCompatActivity {
     }
     public void showRoomCode()
     {
-        //TextView textView = findViewById(R.id.roomCodeText);
-        //textView.setText();
+        String roomCode = getIntent().getExtras().get("roomCode").toString();
+        TextView textView = findViewById(R.id.roomCodeText);
+        textView.setText(roomCode);
     }
     @Override
     public void onBackPressed(){

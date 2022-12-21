@@ -60,13 +60,12 @@ public class DB {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         activity.roomExistResult(true, roomCode);
-                    } else {
-                        activity.roomExistResult(false, roomCode);
                     }
-                } else {
-                    activity.roomExistResult(false, roomCode);
-
+                    else
+                        activity.roomExistResult(false, roomCode);
                 }
+                else
+                    activity.roomExistResult(false, roomCode);
             }
         });
     }
