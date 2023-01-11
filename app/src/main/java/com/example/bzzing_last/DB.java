@@ -1,5 +1,8 @@
 package com.example.bzzing_last;
 
+import android.app.Activity;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,24 +22,27 @@ public class DB {
         this.activity = activity;
     }
 
-    public void insertPlayer()
-    {
 
-    }
 
-    public void findGameRoomByNumber(int code){
+    public String findGameRoomByNumber(int code){
         db.collection("GameRooms")
-                .whereEqualTo("roomCode", code)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .document("" + code)
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful())
+                        {
+                            DocumentSnapshot document = task.getResult();
+                            if(document.exists())
+                            {
+                                activity.handleFindGameRoomByNumber(true, "");
                             }
+                            else
+                                activity.handleFindGameRoomByNumber(false, "gameRoomNotExist");
                         }
-
-                        else {
+                        else
+                        {
+                            activity.handleFindGameRoomByNumber(false, "failed");
                         }
                     }
                 });

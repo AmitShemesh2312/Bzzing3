@@ -2,6 +2,7 @@ package com.example.bzzing_last;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -92,7 +93,16 @@ public class MainActivity extends AppCompatActivity implements GameRoomHandler {
     public void joinRoom()
     {
         //הצטרפות לחדר
+        database.findGameRoomByNumber(roomCode);
+
     }
+
+    @Override
+    public void handleFindGameRoomByNumber(boolean success, String respond)
+    {
+
+    }
+
     @Override
     public void handleGameRoomData(boolean success) {
         if (success){
@@ -117,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements GameRoomHandler {
             database.addGameRoom(gameRoom);
         }
     }
+
 
     public void randomNumbers()
     {
