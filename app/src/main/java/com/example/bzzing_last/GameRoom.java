@@ -25,8 +25,8 @@ public class GameRoom{
         return maxPlayers;
     }
 
-    public void setPlayersNum() {
-        this.playersNum++;
+    public void setPlayersNum(int num) {
+        this.playersNum+=num;
     }
     public int getPlayersNum() {
         return playersNum;
@@ -74,4 +74,14 @@ public class GameRoom{
             players.set(i, new Player(name, score));
         }
     }
+
+
+    public void addPlayer(Player p)
+    {
+      //  if(players.size()==4)
+         //   return false;
+        players.add(p);
+       // return true;
+    }
+
 }

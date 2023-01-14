@@ -1,12 +1,12 @@
 package com.example.bzzing_last;
 
 public class Player {
-    private int score;
     private String name;
+    private int score;
 
     public Player(String name, int score) {
-        this.score = score;
         this.name = name;
+        this.score = score;
     }
 
     public Player() {

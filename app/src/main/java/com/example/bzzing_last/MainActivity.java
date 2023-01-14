@@ -2,7 +2,6 @@ package com.example.bzzing_last;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,14 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.firebase.firestore.DocumentReference;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity implements GameRoomHandler {
+public class MainActivity extends AppCompatActivity implements MainActivityHandler {
     private int choice = 0;
     private DB database = new DB(this);
+    ArrayList<Player> arr;
     private GameRoom gameRoom;
     private int roomCode = 0;
 
@@ -58,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements GameRoomHandler {
         {
             if(choice == 1)
             {
-                b.setBackgroundColor(Color.parseColor("#000000"));//לתקן צבע
                 createRoom();
             }
             else if (rC.equals("")) {
@@ -67,8 +65,8 @@ public class MainActivity extends AppCompatActivity implements GameRoomHandler {
             }
             else
             {
-                b.setBackgroundColor(Color.parseColor("#000000"));//לתקן צבע
-                joinRoom();
+                this.roomCode = Integer.parseInt(rC);
+                database.findGameRoomByNumber(this.roomCode);
             }
         }
         else
@@ -77,30 +75,52 @@ public class MainActivity extends AppCompatActivity implements GameRoomHandler {
 
     private void createRoom() {
         gameRoom = new GameRoom();
-        gameRoom.setPlayersNum();
+        gameRoom.setPlayersNum(1);
 
-        ArrayList<Player> arr = new ArrayList<>();
+        arr = new ArrayList<>();
 
         EditText userName = findViewById(R.id.typeName);
         String name = userName.getText().toString();
-        for (int i = 0; i < gameRoom.getPlayersNum() ; i++)
-            arr.add(new Player(name,  i));
+
+        arr.add(new Player(name,0));
 
         gameRoom.setPlayers(arr);
         randomNumbers();
     }
 
-    public void joinRoom()
-    {
-        //הצטרפות לחדר
-        database.findGameRoomByNumber(roomCode);
 
-    }
 
     @Override
-    public void handleFindGameRoomByNumber(boolean success, String respond)
+    public void handleFindGameRoomByNumber(String respond, GameRoom g)
     {
+        Button b = (Button) findViewById(R.id.btnNextPage);
+        if(respond.equals("failed")){
+            Toast.makeText(this, "Try Again", Toast.LENGTH_SHORT).show();
+            b.setEnabled(true);
+        }
+        else if(respond.equals("gameRoomNotExist"))
+        {
+            Toast.makeText(this, "Room Doesn't Exist!", Toast.LENGTH_SHORT).show();
+            b.setEnabled(true);
+        }
+        else{
+            joinRoom();
+        }
+    }
+    public void joinRoom()
+    {
+        EditText text = findViewById(R.id.typeName);
+        String name = text.getText().toString();
+        gameRoom.addPlayer(null);
+     //   if(intoArr)
+     //       gameRoom.setPlayersNum(1);
+      //  else
+       //     gameRoom.setPlayers(arr);//jkjljlkjljlkjlkjlkjlkjklj
 
+        Intent intent = new Intent(this, WaitingRoom.class);
+        intent.putExtra("gameRoom", (Serializable) gameRoom);
+        startActivity(intent);
+        ////
     }
 
     @Override
@@ -108,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements GameRoomHandler {
         if (success){
             Intent intent = new Intent(this, WaitingRoom.class);
             intent.putExtra("roomCode", roomCode);
+            intent.putExtra("arr", arr);
             startActivity(intent);
         }
         else {

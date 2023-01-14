@@ -22,19 +22,21 @@ import org.w3c.dom.Text;
 import java.util.Random;
 import java.util.ArrayList;
 
-public class WaitingRoom extends AppCompatActivity {
+public class WaitingRoom extends AppCompatActivity implements WaitingRoomHandler {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+    private DB database;
+    private int times = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waiting_room);
-        showRoomCode();
-
-
-
+        times++;
+        if(times == 1)
+            showRoomCode();
+        else
+            join();
     }
     public void showRoomCode()
     {
@@ -42,10 +44,20 @@ public class WaitingRoom extends AppCompatActivity {
         TextView textView = findViewById(R.id.roomCodeText);
         textView.setText(roomCode);
     }
+    public void join()
+    {
+        Object gameRoom = getIntent().getExtras().get("gameRoom");
+
+      //  database.addGameRoom(gameRoom);
+    }
     @Override
     public void onBackPressed(){
         return;
     }
 
 
+    @Override
+    public void answer(boolean respond) {
+
+    }
 }
