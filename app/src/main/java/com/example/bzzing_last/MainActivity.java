@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
     @Override
     public void handleGameRoomData(boolean success) {
         if (success){
-            Intent intent = new Intent(this, WaitingRoom.class);
+            Intent intent = new Intent(MainActivity.this, WaitingRoom.class);
             intent.putExtra("roomCode", roomCode);
             intent.putExtra("arr", arr);
             startActivity(intent);
@@ -153,8 +153,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
     public void randomNumbers()
     {
         Random rnd = new Random();
-        int random = rnd.nextInt(899999) + 100000;
-        roomCode = random;
+        roomCode = rnd.nextInt(899999) + 100000;
         database.roomExist(roomCode);
     }
 }
