@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
         setContentView(R.layout.activity_main);
     }
 
-    public void roomChoice(View view) {
+    public void roomChoice(View view) { //בודקת על איזה כפתור לחץ המשתמש. לפתוח חדר חדש או להתחבר לחדר קיים
         Button button = (Button)view;
         String b = button.getResources().getResourceEntryName(button.getId());
         button.setBackgroundColor(Color.parseColor("#AA00FF"));
@@ -44,10 +44,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
         }
     }
 
-    public void nextPage(View view) {
+    public void nextPage(View view) { //אם המשתמש לחץ על המשך, הפעולה תפעל בהתאם לפי הכפתור בו בחר
         Button b = (Button) findViewById(R.id.btnNextPage);
         b.setEnabled(false);
-
 
         EditText name = findViewById(R.id.typeName);
         String n = name.getText().toString();
@@ -69,11 +68,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
                 database.findGameRoomByNumber(this.roomCode);
             }
         }
-        else
+        else {
             Toast.makeText(this, "Enter the required fields", Toast.LENGTH_SHORT).show();
+            b.setEnabled(true);
+        }
     }
 
-    private void createRoom() {
+    private void createRoom() { //הפעולה יוצרת חדר חדש מסוג GameRoom ומכניסה אליו את השחקן
         gameRoom = new GameRoom();
         gameRoom.setPlayersNum(1);
 
@@ -91,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
 
 
     @Override
-    public void handleFindGameRoomByNumber(String respond, GameRoom g)
+    public void handleFindGameRoomByNumber(String respond, GameRoom g) //במידה והחדר קיים, תקרא לפעולה joinRoom ובמידה שלא תחזיר הודעה מתאימה
     {
         Button b = (Button) findViewById(R.id.btnNextPage);
         if(respond.equals("failed")){
@@ -104,21 +105,19 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
             b.setEnabled(true);
         }
         else{
+            gameRoom = g;
             joinRoom();
         }
     }
-    public void joinRoom()
+    public void joinRoom() //הפעולה מוסיפה שחקן לGameRoom במידה ויש מקום ומעבירה עמוד
     {
         EditText text = findViewById(R.id.typeName);
         String name = text.getText().toString();
-        gameRoom.addPlayer(null);
-     //   if(intoArr)
-     //       gameRoom.setPlayersNum(1);
-      //  else
-       //     gameRoom.setPlayers(arr);//jkjljlkjljlkjlkjlkjlkjklj
+
+           // Toast.makeText(this, "Game Is Already Full!", Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(this, WaitingRoom.class);
-        intent.putExtra("gameRoom", (Serializable) gameRoom);
+        //intent.putExtra("gameRoom", (Serializable) gameRoom);
         startActivity(intent);
         ////
     }

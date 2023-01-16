@@ -8,6 +8,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+
 public class DB {
     FirebaseFirestore db;
     MainActivityHandler activity;
@@ -34,7 +36,7 @@ public class DB {
                 });
     }
 
-    public void findGameRoomByNumber(int code) {
+    public void findGameRoomByNumber(int code) { //הפעולה בודקת אם חדר המשחק קיים לפי הקוד ומחזירה בהתאם
         db.collection("GameRooms")
                 .document("" + code)
                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -43,7 +45,7 @@ public class DB {
                         if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
-                                activity.handleFindGameRoomByNumber("", document.toObject(GameRoom.class));
+                                activity.handleFindGameRoomByNumber("", new GameRoom((HashMap<String, Object>) document.getData()));
                             } else
                                 activity.handleFindGameRoomByNumber( "gameRoomNotExist", null);
                         } else {
