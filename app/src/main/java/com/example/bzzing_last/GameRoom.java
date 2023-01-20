@@ -13,10 +13,9 @@ public class GameRoom{
     private int roomCode;
 
 
-    public GameRoom(int roomCode, int playersNum, int rounds)
+    public GameRoom(int roomCode, int rounds)
     {
         this.roomCode = roomCode;
-        this.playersNum = playersNum;
         this.rounds = rounds;
         this.players = new ArrayList<>(4);
     }
@@ -67,15 +66,15 @@ public class GameRoom{
     public  GameRoom(HashMap<String,Object> map)
     {
         // hashmap to game room object
-        this.playersNum = (int) map.get("playersNum");
-        this.rounds = (int) map.get("rounds");
-        this.playersNum = (int) map.get("playersNum");
-        for (int i = 0; i < playersNum; i++)
-        {
-            int score= (int) map.get("score"+i);
-            String name = (String) map.get("name"+i);
-            players.set(i, new Player(name, score));
-        }
+        //this.playersNum = (int) map.get("playersNum");
+        //this.rounds = (int) map.get("rounds");
+      //  this.playersNum = (int) map.get("playersNum");
+       // for (int i = 0; i < playersNum; i++)
+        //{
+         //   int score= (int) map.get("score"+i);
+           // String name = (String) map.get("name"+i);
+            //players.set(i, new Player(name, score));
+        //}
     }
 
     public boolean addPlayer(Player p) //הפעולה מוסיפה שחקן למערך השחקנים במידה ויש מקום ותחזיר במידה ואין
