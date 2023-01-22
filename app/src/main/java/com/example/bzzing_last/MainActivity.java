@@ -17,7 +17,7 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity implements MainActivityHandler {
     private int choice = 0;
     private DB database = new DB(this);
-    ArrayList<Player> arr;
+    private ArrayList<Player> arr;
     private GameRoom gameRoom;
     private int roomCode = 0;
 
@@ -55,9 +55,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
         if (choice != 0 && !n.equals(""))
         {
             if(choice == 1)
-            {
                 createRoom();
-            }
             else if (rC.equals("")) {
                 Toast.makeText(this, "Enter room code", Toast.LENGTH_SHORT).show();
                 b.setEnabled(true);
@@ -113,16 +111,18 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
     {
         EditText text = findViewById(R.id.typeName);
         String name = text.getText().toString();
+        if(!gameRoom.addPlayer(new Player(name,0),gameRoom.getPlayersNum()))
+            Toast.makeText(this, "Game Is Already Full!", Toast.LENGTH_SHORT).show();
 
-           // Toast.makeText(this, "Game Is Already Full!", Toast.LENGTH_SHORT).show();
-
-        Intent intent = new Intent(this, WaitingRoom.class);
-        //intent.putExtra("gameRoom", (Serializable) gameRoom);
-        startActivity(intent);
-        ////
+        else
+        {
+            Intent intent = new Intent(this, WaitingRoom.class);
+            intent.putExtra("gameRoom", (Serializable) gameRoom);
+            startActivity(intent);
+        }
     }
 
-    @Override
+
     public void handleGameRoomData(boolean success) {
         if (success){
             Intent intent = new Intent(MainActivity.this, WaitingRoom.class);

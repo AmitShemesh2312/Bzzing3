@@ -45,7 +45,7 @@ public class DB {
                         if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
-//                                activity.handleFindGameRoomByNumber("", new GameRoom((HashMap<String, Object>) document.getData()));
+                                activity.handleFindGameRoomByNumber("", new GameRoom((HashMap<String, Object>) document.getData()));
                             }
                             else
                                 activity.handleFindGameRoomByNumber( "gameRoomNotExist", null);

@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class GameRoom{
     private final int maxPlayers = 4;
     private ArrayList<Player> players;
-    private int playersNum = players.size();
+    private int playersNum;
     private int rounds = 0;
     private int roomCode;
 
@@ -18,6 +18,7 @@ public class GameRoom{
         this.roomCode = roomCode;
         this.rounds = rounds;
         this.players = new ArrayList<>(4);
+        playersNum = players.size();
     }
 
     public GameRoom(){} //פעולה בונה ריקה
@@ -66,20 +67,20 @@ public class GameRoom{
     public  GameRoom(HashMap<String,Object> map)
     {
         // hashmap to game room object
-        //this.playersNum = (int) map.get("playersNum");
-        //this.rounds = (int) map.get("rounds");
-      //  this.playersNum = (int) map.get("playersNum");
-       // for (int i = 0; i < playersNum; i++)
-        //{
-         //   int score= (int) map.get("score"+i);
-           // String name = (String) map.get("name"+i);
-            //players.set(i, new Player(name, score));
-        //}
+        this.playersNum = Integer.parseInt(map.get("playersNum").toString());
+        this.rounds = (int) map.get("rounds");
+        this.playersNum = (int) map.get("playersNum");
+        for (int i = 0; i < playersNum; i++)
+        {
+            int score= (int) map.get("score"+i);
+            String name = (String) map.get("name"+i);
+            players.set(i, new Player(name, score));
+        }
     }
 
-    public boolean addPlayer(Player p) //הפעולה מוסיפה שחקן למערך השחקנים במידה ויש מקום ותחזיר במידה ואין
+    public boolean addPlayer(Player p, int num) //הפעולה מוסיפה שחקן למערך השחקנים במידה ויש מקום ותחזיר במידה ואין
     {
-        if(players.size()==4)
+        if(num == 4)
             return false;
         players.add(p);
         return true;
