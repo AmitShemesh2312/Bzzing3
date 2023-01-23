@@ -23,15 +23,16 @@ public class DB {
     {
         db.collection("GameRooms")
                 .document("" + gameRoom.getRoomCode())
-                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                .update(gameRoom.GameRoomToHashMap()).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if(task.isComplete())
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful())
                         {
-                    //        activity.
-                        }
-                      //  else
 
+                        }
+                        else{
+
+                        }
                     }
                 });
     }

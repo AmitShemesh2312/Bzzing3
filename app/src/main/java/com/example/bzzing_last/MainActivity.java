@@ -111,14 +111,21 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
     {
         EditText text = findViewById(R.id.typeName);
         String name = text.getText().toString();
-        if(!gameRoom.addPlayer(new Player(name,0),gameRoom.getPlayersNum()))
-            Toast.makeText(this, "Game Is Already Full!", Toast.LENGTH_SHORT).show();
+        int playersNumber = gameRoom.getPlayersNum();
+        if(playersNumber < 4) {
+            gameRoom.addPlayer(new Player(name, 0));
+            gameRoom.setPlayersNum(playersNumber+1);
+            database.updateGameRoom(gameRoom);
 
+
+            Intent intent = new Intent(this, WaitingRoom.class);
+            intent.putExtra("roomCode", roomCode);
+            intent.putExtra("name", name);
+            startActivity(intent);
+        }
         else
         {
-            Intent intent = new Intent(this, WaitingRoom.class);
-            intent.putExtra("gameRoom", (Serializable) gameRoom);
-            startActivity(intent);
+            Toast.makeText(this, "Game Is Already Full!", Toast.LENGTH_SHORT).show();
         }
     }
 

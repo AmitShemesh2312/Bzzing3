@@ -68,22 +68,15 @@ public class GameRoom{
     {
         // hashmap to game room object
         this.playersNum = Integer.parseInt(map.get("playersNum").toString());
-        this.rounds = (int) map.get("rounds");
-        this.playersNum = (int) map.get("playersNum");
-        for (int i = 0; i < playersNum; i++)
-        {
-            int score= (int) map.get("score"+i);
-            String name = (String) map.get("name"+i);
-            players.set(i, new Player(name, score));
-        }
+        this.rounds = Integer.parseInt(map.get("rounds").toString());
+        this.players = (ArrayList<Player>)(map.get("players"));
+        this.roomCode = Integer.parseInt(map.get("roomCode").toString());
+
     }
 
-    public boolean addPlayer(Player p, int num) //הפעולה מוסיפה שחקן למערך השחקנים במידה ויש מקום ותחזיר במידה ואין
+    public void addPlayer(Player p)
     {
-        if(num == 4)
-            return false;
-        players.add(p);
-        return true;
+        this.players.add(p);
     }
 
 }

@@ -27,17 +27,13 @@ public class WaitingRoom extends AppCompatActivity/* implements WaitingRoomHandl
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private DB database;
-    private int times = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waiting_room);
-        times++;
-        if(times == 1)
-            showRoomCode();
-        else
-            join();
+        showRoomCode();
+        join();
         //ArrayList<Player> players = new ArrayList<Player>();
         //players = (ArrayList<Player>)getIntent().getSerializableExtra("arr");
 
