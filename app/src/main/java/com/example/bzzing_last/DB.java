@@ -28,10 +28,10 @@ public class DB {
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful())
                         {
-
+                            activity.handleUpdateGameRoom(true);
                         }
                         else{
-
+                            activity.handleUpdateGameRoom(false);
                         }
                     }
                 });

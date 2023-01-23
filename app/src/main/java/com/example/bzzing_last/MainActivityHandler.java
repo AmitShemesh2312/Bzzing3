@@ -4,4 +4,5 @@ public interface MainActivityHandler {
     void handleGameRoomData(boolean success);
     void roomExistResult(boolean success, int roomCode);
     void handleFindGameRoomByNumber(String respond, GameRoom gameRoom);
+    void handleUpdateGameRoom(boolean b);
 }

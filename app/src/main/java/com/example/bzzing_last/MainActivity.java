@@ -114,10 +114,23 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
         int playersNumber = gameRoom.getPlayersNum();
         if(playersNumber < 4) {
             gameRoom.addPlayer(new Player(name, 0));
-            gameRoom.setPlayersNum(playersNumber+1);
+            gameRoom.setPlayersNum(playersNumber + 1);
             database.updateGameRoom(gameRoom);
+        }
+        else
+        {
+            Toast.makeText(this, "Game Is Already Full!", Toast.LENGTH_SHORT).show();
+            Button b = (Button) findViewById(R.id.btnNextPage);
+            b.setEnabled(true);
 
-
+        }
+    }
+    public void handleUpdateGameRoom(boolean b)
+    {
+        EditText text = findViewById(R.id.typeName);
+        String name = text.getText().toString();
+        if (b)
+        {
             Intent intent = new Intent(this, WaitingRoom.class);
             intent.putExtra("roomCode", roomCode);
             intent.putExtra("name", name);
@@ -125,8 +138,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
         }
         else
         {
-            Toast.makeText(this, "Game Is Already Full!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Try Again!", Toast.LENGTH_SHORT).show();
         }
+
     }
 
 

@@ -18,7 +18,7 @@ public class GameRoom{
         this.roomCode = roomCode;
         this.rounds = rounds;
         this.players = new ArrayList<>(4);
-        playersNum = players.size();
+        playersNum = players.size()-1;
     }
 
     public GameRoom(){} //פעולה בונה ריקה
@@ -55,13 +55,11 @@ public class GameRoom{
     public HashMap<String,Object> GameRoomToHashMap()
     {
         HashMap<String, Object> map = new HashMap<>();
-
         map.put("roomCode", roomCode);
         map.put("playersNum", playersNum);
         map.put("rounds", rounds);
         map.put("players",players);
         return map;
-
     }
 
     public  GameRoom(HashMap<String,Object> map)

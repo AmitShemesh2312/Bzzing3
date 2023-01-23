@@ -33,7 +33,6 @@ public class WaitingRoom extends AppCompatActivity/* implements WaitingRoomHandl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waiting_room);
         showRoomCode();
-        join();
         //ArrayList<Player> players = new ArrayList<Player>();
         //players = (ArrayList<Player>)getIntent().getSerializableExtra("arr");
 
@@ -46,20 +45,10 @@ public class WaitingRoom extends AppCompatActivity/* implements WaitingRoomHandl
         TextView textView = findViewById(R.id.roomCodeText);
         textView.setText(roomCode);
     }
-    public void join()
-    {
-        Object gameRoom = getIntent().getExtras().get("gameRoom");
 
-      //  database.addGameRoom(gameRoom);
-    }
     @Override
     public void onBackPressed(){
         return;
     }
 
-
-//    @Override
-   // public void answer(boolean respond) {
-
-   // }
 }
