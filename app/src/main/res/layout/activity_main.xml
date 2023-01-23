@@ -95,11 +95,12 @@
         android:id="@+id/typeRoomCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:layout_marginStart="40dp"
         android:layout_marginTop="16dp"
         android:allowUndo="false"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:hint="Enter Room Code"
         android:imeOptions="actionDone"
         android:visibility="invisible"
