@@ -18,7 +18,7 @@ public class GameRoom{
         this.roomCode = roomCode;
         this.rounds = rounds;
         this.players = new ArrayList<>(4);
-        playersNum = players.size()-1;
+        playersNum = players.size();
     }
 
     public GameRoom(){} //פעולה בונה ריקה

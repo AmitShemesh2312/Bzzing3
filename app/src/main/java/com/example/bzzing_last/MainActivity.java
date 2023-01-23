@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
     private DB database = new DB(this);
     private ArrayList<Player> arr;
     private GameRoom gameRoom;
-    private int roomCode = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +61,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
             }
             else
             {
-                this.roomCode = Integer.parseInt(rC);
-                database.findGameRoomByNumber(this.roomCode);
+                database.findGameRoomByNumber(Integer.parseInt(rC));
             }
         }
         else {
@@ -114,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
         int playersNumber = gameRoom.getPlayersNum();
         if(playersNumber < gameRoom.getMaxPlayers()) {
             gameRoom.addPlayer(new Player(name, 0));
-            gameRoom.setPlayersNum(playersNumber + 1);
+            gameRoom.setPlayersNum(1);
             database.updateGameRoom(gameRoom);
         }
         else
@@ -132,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
         if (b)
         {
             Intent intent = new Intent(this, WaitingRoom.class);
-            intent.putExtra("roomCode", roomCode);
+            intent.putExtra("roomCode", gameRoom.getRoomCode());
             intent.putExtra("name", name);
             startActivity(intent);
         }
@@ -148,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
     public void handleGameRoomData(boolean success) {
         if (success){
             Intent intent = new Intent(MainActivity.this, WaitingRoom.class);
-            intent.putExtra("roomCode", roomCode);
+            intent.putExtra("roomCode", gameRoom.getRoomCode());
             intent.putExtra("arr", arr);
             startActivity(intent);
         }
@@ -173,7 +171,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
     public void randomNumbers()
     {
         Random rnd = new Random();
-        roomCode = rnd.nextInt(899999) + 100000;
-        database.roomExist(roomCode);
+        int r = rnd.nextInt(899999) + 100000;
+        gameRoom.setRoomCode(r);
+        database.roomExist(r);
     }
 }
