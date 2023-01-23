@@ -129,7 +129,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
         if (b)
         {
             Intent intent = new Intent(this, WaitingRoom.class);
-            intent.putExtra("roomCode", AppUtilities.gameRoom.getRoomCode());
             intent.putExtra("name", name);
             startActivity(intent);
         }

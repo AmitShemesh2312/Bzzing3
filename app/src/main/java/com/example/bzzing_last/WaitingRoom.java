@@ -37,13 +37,11 @@ public class WaitingRoom extends AppCompatActivity/* implements WaitingRoomHandl
     }
     public void showRoomCode()
     {
-        String roomCode = getIntent().getExtras().get("roomCode").toString();
-        for (int i = 0; i < 3; i++) {
+        AppUtilities.gameRoom.getRoomCode();
 
-        }
 
         TextView textView = findViewById(R.id.roomCodeText);
-        textView.setText(roomCode);
+        textView.setText(AppUtilities.gameRoom.getRoomCode());
     }
 
     @Override
