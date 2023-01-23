@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
         EditText text = findViewById(R.id.typeName);
         String name = text.getText().toString();
         int playersNumber = gameRoom.getPlayersNum();
-        if(playersNumber < 4) {
+        if(playersNumber < gameRoom.getMaxPlayers()) {
             gameRoom.addPlayer(new Player(name, 0));
             gameRoom.setPlayersNum(playersNumber + 1);
             database.updateGameRoom(gameRoom);
@@ -138,9 +138,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
         }
         else
         {
+            Button button = (Button) findViewById(R.id.btnNextPage);
+            button.setEnabled(true);
             Toast.makeText(this, "Try Again!", Toast.LENGTH_SHORT).show();
         }
-
     }
 
 
@@ -168,7 +169,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
             database.addGameRoom(gameRoom);
         }
     }
-
 
     public void randomNumbers()
     {
