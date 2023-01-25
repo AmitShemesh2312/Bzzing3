@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
     }
 
     @Override
-    public void roomExistResult(boolean success, int roomCode) {// אם אין חדר כזה הפעולה תוסיף GameRoom לDataBase. אם יש תקרא לrandomNumbers שוב
+    public void roomExistResult(boolean success, int roomCode) {// אם אין חדר בעל אותו קוד הפעולה תוסיף GameRoom לFireBase. אם יש תקרא לrandomNumbers שוב
         if (success)
             randomNumbers();
         else
@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
         }
     }
 
-    public void randomNumbers()
+    public void randomNumbers()// מגרילה חדר משחק, מעדכנת את הGameRoom וקוראת לפעולה roomExist אשר בודקת אם הוא קיים
     {
         Random rnd = new Random();
         int r = rnd.nextInt(899999) + 100000;
