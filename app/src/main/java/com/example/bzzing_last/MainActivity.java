@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
     }
 
     @Override
-    public void roomExistResult(boolean success, int roomCode) {
+    public void roomExistResult(boolean success, int roomCode) {// אם אין חדר כזה הפעולה תוסיף GameRoom לDataBase. אם יש תקרא לrandomNumbers שוב
         if (success)
             randomNumbers();
         else
