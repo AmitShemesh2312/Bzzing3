@@ -17,7 +17,6 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity implements MainActivityHandler {
     private int choice = 0;
     private DB database = new DB(this);
-    private ArrayList<Player> arr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,14 +72,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
         AppUtilities.gameRoom = new GameRoom();
         AppUtilities.gameRoom.setPlayersNum(1);
 
-        arr = new ArrayList<>();
+        AppUtilities.gameRoom.setPlayers(new ArrayList<>());
 
         EditText userName = findViewById(R.id.typeName);
         String name = userName.getText().toString();
 
-        arr.add(new Player(name,0));
+        AppUtilities.gameRoom.addPlayer(new Player(name));
 
-        AppUtilities.gameRoom.setPlayers(arr);
         randomNumbers();
     }
 
@@ -110,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
         String name = text.getText().toString();
         int playersNumber = AppUtilities.gameRoom.getPlayersNum();
         if(playersNumber < AppUtilities.gameRoom.getMaxPlayers()) {
-            AppUtilities.gameRoom.addPlayer(new Player(name, 0));
+            AppUtilities.gameRoom.addPlayer(new Player(name));
             AppUtilities.gameRoom.setPlayersNum(1);
             database.updateGameRoom(AppUtilities.gameRoom);
         }
@@ -144,8 +142,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
     public void handleGameRoomData(boolean success) {
         if (success){
             Intent intent = new Intent(MainActivity.this, WaitingRoom.class);
-            intent.putExtra("roomCode", AppUtilities.gameRoom.getRoomCode());
-            intent.putExtra("arr", arr);
             startActivity(intent);
         }
         else {

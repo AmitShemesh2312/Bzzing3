@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameRoom{
-    private final int maxPlayers = 4;
+    private final int maxPlayers = 3;
     private ArrayList<Player> players;
     private int playersNum;
     private int rounds = 0;

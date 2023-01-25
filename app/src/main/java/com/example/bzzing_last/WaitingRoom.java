@@ -33,15 +33,11 @@ public class WaitingRoom extends AppCompatActivity/* implements WaitingRoomHandl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waiting_room);
         showRoomCode();
-
     }
     public void showRoomCode()
     {
-        AppUtilities.gameRoom.getRoomCode();
-
-
         TextView textView = findViewById(R.id.roomCodeText);
-        textView.setText(AppUtilities.gameRoom.getRoomCode());
+        textView.setText(""+AppUtilities.gameRoom.getRoomCode());
     }
 
     @Override

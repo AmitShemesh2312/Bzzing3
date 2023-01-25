@@ -5,13 +5,15 @@ import java.io.Serializable;
 public class Player implements Serializable {
     private String name;
     private int score;
+    private int accuracy;
 
-    public Player(String name, int score) {
+
+
+    public Player(String name) {
         this.name = name;
-        this.score = score;
+        this.score = 0;
+        this.accuracy = 0;
     }
-
-    public Player() {}
 
     public int getScore() {
         return score;
@@ -26,4 +28,8 @@ public class Player implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    public int getAccuracy() {return accuracy;}
+    public void setAccuracy(int accuracy) {this.accuracy = accuracy;}
+
 }
