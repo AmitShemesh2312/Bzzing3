@@ -120,14 +120,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
 
         }
     }
-    public void handleUpdateGameRoom(boolean b)
+    public void handleUpdateGameRoom(boolean b)// אם DB הצליח לעדכן את הFireBase, יעביר לWaiting Room. אם לא, יציג הודעה מתאימה
     {
         EditText text = findViewById(R.id.typeName);
         String name = text.getText().toString();
         if (b)
         {
             Intent intent = new Intent(this, WaitingRoom.class);
-            intent.putExtra("name", name);
             startActivity(intent);
         }
         else
@@ -139,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityHandl
     }
 
 
-    public void handleGameRoomData(boolean success) {
+    public void handleGameRoomData(boolean success) {//אם DB העלה GameRoom לFireBase הפעולה תעביר לWaiting Room
         if (success){
             Intent intent = new Intent(MainActivity.this, WaitingRoom.class);
             startActivity(intent);

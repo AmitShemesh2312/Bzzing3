@@ -69,7 +69,6 @@ public class GameRoom{
         this.rounds = Integer.parseInt(map.get("rounds").toString());
         this.players = (ArrayList<Player>)(map.get("players"));
         this.roomCode = Integer.parseInt(map.get("roomCode").toString());
-
     }
 
     public void addPlayer(Player p)
