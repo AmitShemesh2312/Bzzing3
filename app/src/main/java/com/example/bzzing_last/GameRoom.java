@@ -37,9 +37,7 @@ public class GameRoom{
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
-    public ArrayList<Player> getPlayers() {
-        return players;
-    }
+    public ArrayList<Player> getPlayers() {return players;}
 
     public void setRounds() {
         this.rounds++;
