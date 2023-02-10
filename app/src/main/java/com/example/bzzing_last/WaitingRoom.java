@@ -38,14 +38,15 @@ public class WaitingRoom extends AppCompatActivity/* implements WaitingRoomHandl
     }
 
     private void showPlayer() {
-        GameRoom gameRoom = AppUtilities.gameRoom;
-        ArrayList<Player> arr = gameRoom.getPlayers();
-        for (int i = 1; i < arr.size() + 1; i++) {
-            int resID = getResources().getIdentifier("player" + i, "id", getPackageName());
 
-            TextView textView = findViewById(resID);
-            textView.setText("" + AppUtilities.gameRoom.getPlayers().get(i).getName());
-        }
+        GameRoom gameRoom = AppUtilities.gameRoom;
+        int num = gameRoom.getPlayersNum();
+        int resID = getResources().getIdentifier("player" + num, "id", getPackageName());
+        TextView textView = findViewById(resID);
+
+        ArrayList<Player> arr = gameRoom.getPlayers();
+
+        textView.setText("" + arr.get(num - 1).getName());
     }
 
     public void showRoomCode()

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameRoom{
-    private final int maxPlayers = 3;
+    private final int maxPlayers = 4;
     private ArrayList<Player> players;
     private int playersNum;
     private int rounds = 0;
@@ -17,8 +17,8 @@ public class GameRoom{
     {
         this.roomCode = roomCode;
         this.rounds = rounds;
-        this.players = new ArrayList<>(4);
-        playersNum = players.size()-1;
+        this.players = new ArrayList<>(maxPlayers);
+        playersNum = players.size();
     }
 
     public GameRoom(){} //פעולה בונה ריקה
@@ -28,7 +28,7 @@ public class GameRoom{
     }
 
     public void setPlayersNum(int num) {
-        this.playersNum+=num;
+        this.playersNum += num;
     }
     public int getPlayersNum() {
         return playersNum;
@@ -37,7 +37,7 @@ public class GameRoom{
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
-    public ArrayList<Player> getPlayers() {return players;}
+    public ArrayList<Player> getPlayers() { return players; }
 
     public void setRounds() {
         this.rounds++;
