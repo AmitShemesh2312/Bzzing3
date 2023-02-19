@@ -44,7 +44,7 @@ public class WaitingRoom extends AppCompatActivity/* implements WaitingRoomHandl
             int resID = getResources().getIdentifier("player" + i, "id", getPackageName());
 
             TextView textView = findViewById(resID);
-            textView.setText("" + AppUtilities.gameRoom.getPlayers().get(i).getName());
+            textView.setText("" + AppUtilities.gameRoom.getPlayers().get(i-1).getName());
         }
     }
 

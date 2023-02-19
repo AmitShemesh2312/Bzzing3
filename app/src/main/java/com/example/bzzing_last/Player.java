@@ -1,6 +1,7 @@
 package com.example.bzzing_last;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 public class Player implements Serializable {
     private String name;
@@ -13,6 +14,14 @@ public class Player implements Serializable {
         this.name = name;
         this.score = 0;
         this.accuracy = 0;
+    }
+
+
+    public  Player(HashMap<Integer,Object> map)
+    {
+        this.name = map.get("name").toString();
+        this.score = Integer.valueOf(map.get("score").toString());
+        this.accuracy = Integer.valueOf(map.get("accuracy").toString());
     }
 
     public int getScore() {
