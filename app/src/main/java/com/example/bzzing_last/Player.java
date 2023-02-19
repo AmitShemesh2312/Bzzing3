@@ -17,7 +17,7 @@ public class Player implements Serializable {
     }
 
 
-    public  Player(HashMap<Integer,Object> map)
+    public Player(HashMap<Integer,Object> map)
     {
         this.name = map.get("name").toString();
         this.score = Integer.valueOf(map.get("score").toString());

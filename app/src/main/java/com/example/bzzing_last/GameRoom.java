@@ -66,23 +66,11 @@ public class GameRoom{
         this.playersNum = Integer.parseInt(map.get("playersNum").toString());
         this.rounds = Integer.parseInt(map.get("rounds").toString());
 
-
-
-
-            ArrayList<HashMap<Integer,Object>> hm = (ArrayList<HashMap<Integer,Object>>)map.get("players");
-
+        ArrayList<HashMap<Integer,Object>> hm = (ArrayList<HashMap<Integer,Object>>)map.get("players");
         for (int i = 0; i < hm.size(); i++) {
             this.players.add(new Player(hm.get(i)));
 
         }
-
-
-
-        
-
-
-
-    //    this.players =new ArrayList((ArrayList<Player>)map.get("players"));//(map.get("players"));
         this.roomCode = Integer.parseInt(map.get("roomCode").toString());
     }
 
